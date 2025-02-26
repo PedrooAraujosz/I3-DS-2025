@@ -1,9 +1,10 @@
+
 import style from "./links.module.css";
 
-const links = () => {
+const links = ({children, link}) => {
   return (
     <li>
-      <a href="https://google.com">google.com</a>
+      <a href={link}>{children}</a>
     </li>
   );
 };

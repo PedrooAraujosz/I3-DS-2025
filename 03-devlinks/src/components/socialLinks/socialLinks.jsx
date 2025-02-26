@@ -1,8 +1,10 @@
 import  "./socialLinks.module.css"
 
-const SocialLinks = () => {
+const SocialLinks = ({link,icon}) => {
   return (
-    <a href="https://google.com">🗺️</a>
+    <a href={link}>
+      <ion-icon name={icon}></ion-icon>
+    </a>
   )
 }
 

@@ -3,7 +3,9 @@ import Switch from "./components/switch/Switch";
 import Links from "./components/links/links";
 
 import "./App.css";
-import foto from "./img/IMG_4160.jpg";
+import fotoLigth from "./img/IMG_4160.jpg";
+import fotoDark from "./img/5bb8b70c-e092-48ce-bdf7-a45d6ad286f2.jpg"
+
 
 import SocialLinks from "./components/socialLinks/socialLinks";
 import Rodape from "./components/rodape/Rodape";
@@ -18,19 +20,22 @@ const App = () => {
 
   return (
     <div id="App" className={isLight ? "light" : ""}>
-      <Perfil fotoperfi={foto}> Pedro Araújo</Perfil>
+      <Perfil fotoperfi={isLight ? fotoDark : fotoLigth}> Pedro Araújo</Perfil>
 
       <Switch troca={troca} isLight={isLight} />
-      <ul>
-        <Links link={"https://GitHub.com/PedroAraujosz"}>GitHub</Links>
+      <div id="container">
+      <ul>    
+
+        <Links link={"https://GitHub.com/PedrooAraujosz"}>GitHub</Links>
         <Links link={"https://https://www.instagram.com/"}>Intragam</Links>
         <Links link={"https://TikTok.com"}>TikTok</Links>
         <Links link={"https://linkedin.com/"}>Linkedin</Links>
       </ul>
+      </div>
 
       <div id="socialLinks">
         <SocialLinks
-          link={"https://github.com/PedroAraujosz"}
+          link={"https://github.com/PedrooAraujosz"}
           icon={"logo-github"}
         />
         <SocialLinks

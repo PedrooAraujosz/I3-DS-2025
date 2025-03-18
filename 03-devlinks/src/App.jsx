@@ -35,7 +35,7 @@ const App = () => {
 
       <div id="socialLinks">
         <SocialLinks
-          link={"https://github.com/PedrooAraujosz"}
+          link={"https://github.comPedrooAraujosz/"}
           icon={"logo-github"}
         />
         <SocialLinks

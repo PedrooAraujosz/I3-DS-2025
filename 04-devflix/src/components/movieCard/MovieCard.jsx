@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./MovieCard.module.css";
 import MovieDescription from "./MovieDescription";
 
+
 const MovieCard = (props) => {
   const [ismodalOpen, setIsModalOpen] = useState(false);
 

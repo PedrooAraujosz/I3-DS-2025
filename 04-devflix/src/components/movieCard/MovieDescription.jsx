@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import devFlix from "/favicon.png";
 import styles from "./MovieDescription.module.css";
 
 const MovieDescription = (props) => {
@@ -8,19 +9,49 @@ const MovieDescription = (props) => {
       .then((Response) => Response.json())
       .then((data) => setMoviesDesc(data));
   }, []);
-  console.log(movieDesc);
+
   return (
     <div className={styles.modalBackdrop} onClick={props.Click}>
-        <div className={styles.movieModal} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.movieModal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.movieInfo}>
-          <img src={movieDesc.Poster} alt="" />
-          <button className={styles.btnClose}
-          onClick={props.Click}
-          >x</button>
+          <img
+            src={movieDesc.Poster}
+            alt={`Imagem da capa do filme ${movieDesc.Title}`}
+          />
+          <button className={styles.btnClose} onClick={props.Click}>
+            X
+          </button>
+          <div className={styles.movieType}>
+            <div>
+              <img src={devFlix} alt="" />
+              {movieDesc.Type}
+              <h1>{movieDesc.Title}</h1>
+              <a
+                href={`https://google.com/search?q=${encodeURIComponent(
+                  movieDesc.Title
+                )}`}
+                target="_blank"
+              >
+                ▶️ Assistir
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className={styles.containerMisc}>
+          <div className={styles.containerFlex}>
+            Avaliação: {movieDesc.imdbRating} | Duração: {movieDesc.Runtime} |{" "}
+            {movieDesc.Released}
+          </div>
+          <div className={styles.containerFlex}>
+            <p>Elenco: {movieDesc.Actors}</p>
+            <p>Gênero: {movieDesc.Genre}</p>
+          </div>
+        </div>
+        <div className={styles.desc}>
+          <p>Sinopse: {movieDesc.Plot}</p>
         </div>
       </div>
     </div>
   );
 };
-
-export default MovieDescription;
+export default MovieDescription

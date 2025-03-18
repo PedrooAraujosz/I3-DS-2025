@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
- import Logo from "./assets/devflix.png"
-import lupa from "./assets/search.svg"
+import Logo from "./assets/devflix.png";
+import lupa from "./assets/search.svg";
 const App = () => {
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
 
   //Utilizando chave de API do arquivo .env
-  const apiKey = import.meta.env.VITE_OMDB_API_KEY;
+  //const apiKey = import.meta.env.VITE_OMDB_API_KEY;
+  const apiKey = "e4d577fa";
   const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
 
   //Alimentando com dados para não ficar nulo com useEffect
@@ -42,21 +43,14 @@ const App = () => {
           type="text"
           placeholder="Pesquise por filmes"
         />
-        <img
-          onClick={() => searchMovies(search)}
-          src={lupa}
-          alt=""
-        />
+        <img onClick={() => searchMovies(search)} src={lupa} alt="" />
       </div>
-      <div>
-
-      </div>
+      <div></div>
 
       {movies?.length > 0 ? (
         <div className="container">
           {movies.map((movie, index) => (
             <MovieCard key={index} apiUrl={apiUrl} {...movie} />
-
           ))}
         </div>
       ) : (

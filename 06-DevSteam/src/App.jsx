@@ -8,14 +8,15 @@ function App() {
   const [carrinhoItem, setCarrinhoItem] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("carrinho-devsteam", JSON.stringify(carrinhoItem));
+    localStorage.setItem("devcarrinho", JSON.stringify(carrinhoItem));
   }, [carrinhoItem]);
-  
+
   useEffect(() => {
-    const salvaCarrinho = localStorage.getItem("carrinho-devsteam");
+    const salvaCarrinho = localStorage.getItem("devcarrinho");
     salvaCarrinho && setCarrinhoItem(JSON.parse(salvaCarrinho));
   }, []);
 
+  // console.log(localStorage.getItem("devcarrinho"));
 
   const handleAddCarrinho = (produto) => {
     setCarrinhoItem((itemAnterior) => {
@@ -32,14 +33,23 @@ function App() {
     });
   };
 
-  console.log(localStorage.getItem("carrinho-devsteam"));
+  const handleRemoveCarrinho = (produto) => {
+    setCarrinhoItem((itemAnterior) =>
+      itemAnterior.filter((item) => item.id !== produto.id)
+    );
+  };
+
   return (
     <>
       <Header contadorJogos={carrinhoItem.length} />
       <Promotion
         onAddCarrinho={handleAddCarrinho} //adicionando o click para promoção
-        />
-        <div>CarrinhoOffCanvas</div>
+      />
+
+      <CarrinhoOffCanvas
+        onRemoveCarrinho={handleRemoveCarrinho}
+        carrinhoItem={carrinhoItem}
+      />
     </>
   );
 }

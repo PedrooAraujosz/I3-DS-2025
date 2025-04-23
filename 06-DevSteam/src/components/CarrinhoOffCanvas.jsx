@@ -43,15 +43,18 @@ const CarrinhoOffCanvas = (props) => {
                       height={56}
                     />
                     <h6 className="fw-bold">{item.titulo}</h6>
-                    <button className="btn btn-close"></button>
+                    <button className="btn btn-close" onClick={()=>props.onRemoveCarrinho(item)}></button>
                   </div>
 
                   <div className="d-flex justify-content-between">
                     <div className=""></div>
                     <div className="border border-black border-1 d-flex align-items-center rounded-4 gap-2">
-                      <button className="btn border-0"
-                            disabled={item.quantidade ===                            1}                      
-                      >-</button>
+                      <button
+                        className="btn border-0"
+                        disabled={item.quantidade === 1}
+                      >
+                        -
+                      </button>
                       <span>{item.quantidade}</span>
                       <button className="btn border-0">+</button>
                     </div>

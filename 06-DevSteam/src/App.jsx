@@ -1,30 +1,45 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import { useState } from "react";
 import Header from "./components/Header";
 import Promotion from "./components/Promotion";
+import CarrinhoOffCanvas from "./components/CarrinhoOffCanvas";
 
 function App() {
+  const [carrinhoItem, setCarrinhoItem] = useState([]);
 
-   const [carrinhoItem, setCarrinhoItem] = useState([]);
-   const [mostraCarrinho, setMostraCarrinho] = useState(false);
+  useEffect(() => {
+    localStorage.setItem("carrinho-devsteam", JSON.stringify(carrinhoItem));
+  }, [carrinhoItem]);
+  
+  useEffect(() => {
+    const salvaCarrinho = localStorage.getItem("carrinho-devsteam");
+    salvaCarrinho && setCarrinhoItem(JSON.parse(salvaCarrinho));
+  }, []);
 
-   const adcionarCarrinho = (produto) => {
-    setCarrinhoItem((produtoAnteriores)=>{
-      const existing = produtoAnteriores.find((item)=>
-         item.id === produto.id);
-      if(existing){
-         return produtoAnteriores.map((item)=>
-            item.id === produto.id ? {...item, quantidade: item.quantidade + 1} : item
-         )
-   
-   
-    })
 
-    return (
+  const handleAddCarrinho = (produto) => {
+    setCarrinhoItem((itemAnterior) => {
+      const existe = itemAnterior.find((item) => item.id === produto.id);
+      if (existe) {
+        return itemAnterior.map((item) =>
+          item.id === produto.id
+            ? { ...item, quantidade: item.quantidade + 1 }
+            : item
+        );
+      } else {
+        return [...itemAnterior, { ...produto, quantidade: 1 }];
+      }
+    });
+  };
+
+  console.log(localStorage.getItem("carrinho-devsteam"));
+  return (
     <>
-      <Header contadorJogos={2} />
-      <Promotion adcionarcarrinho={adcionarCarrinho}/>
-      
+      <Header contadorJogos={carrinhoItem.length} />
+      <Promotion
+        onAddCarrinho={handleAddCarrinho} //adicionando o click para promoção
+        />
+        <div>CarrinhoOffCanvas</div>
     </>
   );
 }
